@@ -49,6 +49,25 @@ def tabulation(N, days):
   
   return dp[N-1][3]
 
+def spaceOptimization(N, days):
+  prev = [0 for i in range(4)]
+  prev[0] = max(days[0][1], days[0][2])
+  prev[1] = max(days[0][0], days[0][2])
+  prev[2] = max(days[0][0], days[0][1])
+  prev[3] = max(days[0][0], days[0][1], days[0][2])
+
+  for day in range(1, N):
+    temp = [0 for i in range(4)]
+    for last in range(4):
+      res = 0
+      for i in range(3):
+        if i != last:
+          res = max(res, days[day][i] + prev[i])
+      temp[last] = res
+    prev = temp.copy()
+  
+  return prev[3]
+
 if __name__=="__main__":
   T = int(input())
   while T:
@@ -57,9 +76,10 @@ if __name__=="__main__":
     for i in range(N):
       days.append(list(map(int, input().strip().split())))
     # print(recursion(-1, N-1, days))
-    dp = [[-1 for i in range(4)] for i in range(N)]
-    print(memoization(3, N-1, days, dp))
+    # dp = [[-1 for i in range(4)] for i in range(N)]
+    # print(memoization(3, N-1, days, dp))
     # print(tabulation(N, days))
+    print(spaceOptimization(N, days))
     T -= 1
 
 '''
