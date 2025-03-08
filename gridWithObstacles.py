@@ -44,11 +44,28 @@ def tabulation(N, M, grid):
       dp[x][y] = left + top
   return dp[N][M]
 
+def spaceOptimization(N, M, grid):
+  prev = [0 for i in range(M+1)]
+  for x in range(1, N+1):
+    curi = [0 for i in range(M+1)]
+    for y in range(1, M+1):
+      if x == 1 and y == 1:
+        curi[y] = 1
+        continue
+      if x > 0 and y > 0 and grid[x-1][y-1] == -1:
+        continue
+      left = curi[y-1]
+      top = prev[y]
+      curi[y] = left + top
+    prev = curi.copy()
+  return prev[M]
+
 def gridWithObstacles(N, M, grid):
-  # print(recursion(N-1, M-1, grid))
-  # dp = [[-1 for i in range(M)] for j in range(N)]
-  # print(memoization(N-1, M-1, grid, dp))
-  print(tabulation(N, M, grid))
+  print("Recursion", recursion(N-1, M-1, grid))
+  dp = [[-1 for i in range(M)] for j in range(N)]
+  print("Memoization",memoization(N-1, M-1, grid, dp))
+  print("Tabulation", tabulation(N, M, grid))
+  print("SpaceOptimization", spaceOptimization(N, M, grid))
 
 grid = [[0, 0, 0], [0, -1, 0], [0, 0, 0]]
 N = len(grid)
