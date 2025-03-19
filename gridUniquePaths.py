@@ -44,8 +44,8 @@ def tabulation(n, m):
 def spaceOptimization(n, m):
   prev = [0 for i in range(m+1)]
   d = [(-1, 0), (0, -1)]
+  curi = [0 for i in range(m+1)]
   for x in range(1, n+1):
-    curi = [0 for i in range(m+1)]
     for y in range(1, m+1):
       if x == 1 and y == 1:
         curi[y] = 1
@@ -73,4 +73,4 @@ def gridUniquePathExist(n, m):
 
   print("Space Optmization: ", spaceOptimization(n, m))
 
-gridUniquePathExist(3, 3)
+gridUniquePathExist(5, 3)
