@@ -38,8 +38,6 @@ def spaceOptimization(s, t):
     prev = cur.copy()
   return prev[m]
 
-
-
 def lcs(s, t):
   n = len(s)
   m = len(t)
